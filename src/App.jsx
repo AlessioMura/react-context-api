@@ -7,23 +7,28 @@ import BlogList from './pages/BlogList'
 import BlogPage from './pages/BlogPage.jsx'
 import './App.css'
 import DefaultLayout from './pages/DefaultLayout'
+import GlobalContext from './context/GlobalContext.jsx'
 
 
 function App() {
 
+  const apiUrl = 'http://localhost:3000'
+
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<DefaultLayout />}>
-            <Route index element={<Home />} />
-            <Route path='/form' element={<Form />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/bloglist' element={<BlogList />} />
-            <Route path='/:id' element={<BlogPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <GlobalContext.Provider value={{ apiUrl }}>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<DefaultLayout />}>
+              <Route index element={<Home />} />
+              <Route path='/form' element={<Form />} />
+              <Route path='/about' element={<About />} />
+              <Route path='/bloglist' element={<BlogList />} />
+              <Route path='/:id' element={<BlogPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </GlobalContext.Provider>
     </>
   )
 }
